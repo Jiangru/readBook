@@ -7,41 +7,24 @@ function resolve (dir) {
 }
 
 module.exports = {
-  entry: {
-    'app': './src/main.js'
-  },
+  mode: 'development',
   output: {
-    filename: '[name].[hash].js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '/',
+    filename: '[name].bundle.js'
   },
   resolve: {
     alias: {
       '@': resolve('src')
     }
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              'presets': ['latest']
-            }
-          }
-        ]
-      }
-    ]
-  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'jiangruyi',
-      // filename: 'asset/index.html',
+      title: 'webpack4',
       template: 'index.html',
-      inject: true,
-      excludeChunks: []
+      inject: true
+      // excludeChunks: ['main']
     })
   ]
 }
