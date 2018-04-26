@@ -1,25 +1,33 @@
 {
   "name": "readBook",
   "version": "1.0.0",
-  "description": "",
+  "description": "webpack+vue+node express",
   "private": true,
   "scripts": {
-    "node": "node ./build/dev-server.js",
-    "demo": "webpack --config ./build/webpack.config.js",
-    "dev": "webpack --mode development",
+    "build": "webpack --config ./build/webpack.dev.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jiangru/readBook.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jiangru/readBook/issues"
+  },
+  "homepage": "https://github.com/Jiangru/readBook#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.19",
-    "express": "^4.16.3",
     "html-webpack-plugin": "^3.2.0",
-    "opn": "^5.3.0",
-    "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.15",
-    "webpack-dev-middleware": "^3.1.2",
-    "webpack-hot-middleware": "^2.22.1"
+    "vue-loader": "^15.0.1",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^3.5.5",
+    "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
   }
 }

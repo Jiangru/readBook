@@ -1,30 +1,32 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+  return path.resolve(__dirname, dir)
 }
 
 module.exports = {
-  mode: 'development',
+  entry: {
+    app: resolve('../src/index.js')
+  },
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    filename: '[name].bundle.js'
+    path: resolve('../dist'),
+    filename: '[name].[chunkhash].js'
   },
   resolve: {
     alias: {
-      '@': resolve('src')
+      'vue$': 'vue/dist/vue.esm.js'
     }
   },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      }
+    ]
+  },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      title: 'webpack4',
-      template: 'index.html',
-      inject: true
-      // excludeChunks: ['main']
-    })
+    new VueLoaderPlugin()
   ]
 }
