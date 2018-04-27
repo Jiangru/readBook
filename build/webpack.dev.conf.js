@@ -1,6 +1,6 @@
 const path = require('path')
 const webpackMerge = require('webpack-merge')
-const baseConfig = require('./webpack.conf')
+const baseConfig = require('./webpack.config')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpckPlugin = require('html-webpack-plugin')
 

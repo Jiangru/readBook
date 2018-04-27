@@ -25,6 +25,10 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader'
       }
     ]
   },

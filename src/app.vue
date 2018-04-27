@@ -1,5 +1,6 @@
-<template>
-  <div>首页</div>
+<template lang="pug">
+  .app 
+    .demo 1111
 </template>
 
 <script>
