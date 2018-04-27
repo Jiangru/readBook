@@ -1,59 +1,37 @@
-const express = require('express')
+const config = require('./webpack.dev.conf')
 const webpack = require('webpack')
-const config = require('./webpack.config')
-const webpackDevMiddleWare = require('webpack-dev-middleware')
-const webpackHotMiddleWare = require('webpack-hot-middleware')
-const router = require('../server/router.js')
-
-// 跨平台开启文件或者网页
+const express = require('express')
 const opn = require('opn')
 
-// 创建一个express实例
-const app = new express()
-
-// 接口请求
-app.use(router)
+const WebpackDevMiddleWare = require('webpack-dev-middleware')
+const WebpackHotMiddleWare = require('webpack-hot-middleware')
 
 const compiler = webpack(config)
 
-const devMiddleWare = (webpackDevMiddleWare(compiler, {
+const app = express()
+const PORT = '8089'
+
+const devMiddleware = WebpackDevMiddleWare(compiler, {
   publicPath: config.output.publicPath,
-  stats: {
-    colors: true
-  }
-}))
+  quiet: false
+})
+const hotMiddleware = WebpackHotMiddleWare(compiler)
 
-const hotMiddleWare = (webpackHotMiddleWare(compiler))
+app.use(devMiddleware)
+app.use(hotMiddleware)
 
-app.use(devMiddleWare)
-app.use(hotMiddleWare)
+const uri = 'http://localhost:' + PORT
 
-var uri = 'http://localhost:8089/'
-
-var _resolve
-var readyPromise = new Promise(resolve => {
-    _resolve = resolve
+devMiddleware.waitUntilValid(function () {
+  console.log('> Listening on ' + uri + '\n')
 })
 
-devMiddleWare.waitUntilValid(() => {
-  console.log(process.env.NODE_ENV)
-  if (process.env.NODE_ENV !== 'testing') {
-      opn(uri)
-  }
-  _resolve
-})
-
-const sever = app.listen(8089, function (err) {
+module.exports = app.listen(PORT, function (err) {
   if (err) {
     console.log(err)
     return
   }
-  console.log('Listening on 8089')
+
+  opn(uri)
 })
 
-module.exports = {
-  ready: readyPromise,
-  close: () => {
-      server.close()
-  }
-}
