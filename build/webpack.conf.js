@@ -11,9 +11,11 @@ module.exports = {
   },
   output: {
     path: resolve('../dist'),
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash].js',
+    publicPath: '/'
   },
   resolve: {
+    extensions: [' ', '.js', '.vue'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     }
