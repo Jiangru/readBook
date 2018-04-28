@@ -4,8 +4,6 @@ const baseConfig = require('./webpack.config')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpckPlugin = require('html-webpack-plugin')
 
-console.log(path.resolve(__dirname, '../dist'))
-
 const pathsToClean = [
   'dist'
 ]
